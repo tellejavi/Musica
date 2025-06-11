@@ -2,15 +2,21 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Mi Reproductor</title>
+  <title>Mi Player</title>
   <style>
-    /* Hack de radio + CSS para mostrar un solo <audio> a la vez */
+    /* Oculta radios y sólo muestra el audio seleccionado */
     input[name="track"] { display: none; }
-    audio { display: none; width: 100%; max-width: 560px; margin-top: 1em; }
+    audio {
+      display: none;
+      width: 100%;
+      max-width: 560px;
+      margin-top: 1em;
+    }
     #t1:checked ~ #audio1,
     #t2:checked ~ #audio2 {
       display: block;
     }
+    /* Estilo de botones */
     .track-label {
       cursor: pointer;
       margin-right: 1em;
@@ -22,15 +28,15 @@
   </style>
 </head>
 <body>
-  <!-- 1) Radios -->
+  <!-- Radios ocultos -->
   <input type="radio" name="track" id="t1" checked>
   <input type="radio" name="track" id="t2">
 
-  <!-- 2) Botones -->
+  <!-- Labels-actúan-como-botones -->
   <label for="t1" class="track-label">Dreamloader</label>
   <label for="t2" class="track-label">My Lucky Stars</label>
 
-  <!-- 3) Players -->
+  <!-- Players -->
   <audio id="audio1" controls preload="none">
     <source src="dreamloader%20-%20space.info-yt.savetube.me.mp3" type="audio/mpeg">
   </audio>
