@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Mi Reproductor</title>
+  <style>
+    /* Hack de radio + CSS para mostrar un solo <audio> a la vez */
+    input[name="track"] { display: none; }
+    audio { display: none; width: 100%; max-width: 560px; margin-top: 1em; }
+    #t1:checked ~ #audio1,
+    #t2:checked ~ #audio2 {
+      display: block;
+    }
+    .track-label {
+      cursor: pointer;
+      margin-right: 1em;
+      color: #065fd4;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .track-label:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <!-- 1) Radios -->
+  <input type="radio" name="track" id="t1" checked>
+  <input type="radio" name="track" id="t2">
+
+  <!-- 2) Botones -->
+  <label for="t1" class="track-label">Dreamloader</label>
+  <label for="t2" class="track-label">My Lucky Stars</label>
+
+  <!-- 3) Players -->
+  <audio id="audio1" controls preload="none">
+    <source src="dreamloader%20-%20space.info-yt.savetube.me.mp3" type="audio/mpeg">
+  </audio>
+  <audio id="audio2" controls preload="none">
+    <source src="My%20Lucky%20Stars-yt.savetube.me.mp3" type="audio/mpeg">
+  </audio>
+</body>
+</html>
