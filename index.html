@@ -2,46 +2,66 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Mi Player</title>
+  <title>SoundCloud Player con Flechas</title>
   <style>
-    /* Oculta radios y sólo muestra el audio seleccionado */
-    input[name="track"] { display: none; }
-    audio {
-      display: none;
+    body {
+      font-family: sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 1em;
+      background: #f0f0f0;
+    }
+    .controls {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1em;
+    }
+    .controls button {
+      padding: 0.5em 1em;
+      font-size: 1rem;
+      cursor: pointer;
+      background: #ff5500;
+      border: none;
+      border-radius: 4px;
+      color: white;
+      transition: background 0.2s;
+    }
+    .controls button:hover {
+      background: #e64e00;
+    }
+    #scplayer {
       width: 100%;
       max-width: 560px;
-      margin-top: 1em;
+      height: 166px; /* altura por defecto del widget de playlist */
+      border: none;
     }
-    #t1:checked ~ #audio1,
-    #t2:checked ~ #audio2 {
-      display: block;
-    }
-    /* Estilo de botones */
-    .track-label {
-      cursor: pointer;
-      margin-right: 1em;
-      color: #065fd4;
-      text-decoration: none;
-      font-weight: bold;
-    }
-    .track-label:hover { text-decoration: underline; }
   </style>
+  <script src="https://w.soundcloud.com/player/api.js"></script>
 </head>
 <body>
-  <!-- Radios ocultos -->
-  <input type="radio" name="track" id="t1" checked>
-  <input type="radio" name="track" id="t2">
+  <div class="controls">
+    <button id="prev">← Anterior</button>
+    <button id="next">Siguiente →</button>
+  </div>
+  <iframe
+    id="scplayer"
+    src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/soundcloud/sets/first-listen&color=%23ff5500&auto_play=false&hide_related=false&show_comments=false&show_user=false"
+    allow="autoplay"
+  ></iframe>
 
-  <!-- Labels-actúan-como-botones -->
-  <label for="t1" class="track-label">Dreamloader</label>
-  <label for="t2" class="track-label">My Lucky Stars</label>
+  <script>
+    // Inicializa el widget de SoundCloud
+    const iframe = document.getElementById('scplayer');
+    const widget = SC.Widget(iframe);
 
-  <!-- Players -->
-  <audio id="audio1" controls preload="none">
-    <source src="dreamloader%20-%20space.info-yt.savetube.me.mp3" type="audio/mpeg">
-  </audio>
-  <audio id="audio2" controls preload="none">
-    <source src="My%20Lucky%20Stars-yt.savetube.me.mp3" type="audio/mpeg">
-  </audio>
+    // Control de prev/next en la playlist
+    document.getElementById('prev').addEventListener('click', () => {
+      widget.prev();
+    });
+    document.getElementById('next').addEventListener('click', () => {
+      widget.next();
+    });
+  </script>
 </body>
 </html>
